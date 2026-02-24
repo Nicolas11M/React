@@ -12,7 +12,12 @@ const JobListings = ({ isHome = false }) => {
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-        setJobs(data);
+         if (isHome) {
+          setJobs(data);
+        } else {
+          setJobs(data);
+        }
+  
       } catch (error) {
         console.log('Error fetching data', error);
       } finally {
@@ -34,7 +39,7 @@ const JobListings = ({ isHome = false }) => {
           <Spinner loading={loading} />
         ) : (
           <div className='grid grid-cols-1 md:grid-cols-3 gap-6'>
-            {jobs.map((job) => (
+            {jobs?.map((job) => (
               <JobListing key={job.id} job={job} />
             ))}
           </div>
